@@ -18,7 +18,7 @@ class Condition3D {
         }
 
         //Devuelve el puntero
-        Node* get_node(){
+        Node* getNode(){
             return node;
         }
 
