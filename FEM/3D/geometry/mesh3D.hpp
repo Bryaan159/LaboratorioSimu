@@ -4,18 +4,8 @@
 #include "element3D.hpp"
 
 // Definiendo los enums para las constantes
-enum parameter3D
-{
-    THERMAL_CONDUCTIVITY,
-    HEAT_SOURCE
-};
-enum quantity3D
-{
-    NUM_NODES,
-    NUM_ELEMENTS,
-    NUM_DIRICHLET,
-    NUM_NEUMANN
-};
+enum parameter3D{THERMAL_CONDUCTIVITY,HEAT_SOURCE};
+enum quantity3D{NUM_NODES,NUM_ELEMENTS,NUM_DIRICHLET,NUM_NEUMANN};
 
 // Declaracion de una clase llamada Mesh3D
 class Mesh3D
@@ -73,8 +63,8 @@ public:
         dirichletConditions = (Condition3D **)malloc(sizeof(Condition3D) * quantities[NUM_DIRICHLET]);
         neumannConditions = (Condition3D **)malloc(sizeof(Condition3D *) * quantities[NUM_NEUMANN]);
     }
-
-    void inserNode(Node *node, short position)
+    //
+    void insertNode(Node *node, short position)
     {
         nodes[position] = node;
     }

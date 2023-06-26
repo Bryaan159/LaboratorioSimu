@@ -6,6 +6,12 @@
         "random": "cpp",
         "functional": "cpp",
         "tuple": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "fstream": "cpp",
+        "string": "cpp",
+        "array": "cpp",
+        "istream": "cpp",
+        "utility": "cpp"
     }
 }

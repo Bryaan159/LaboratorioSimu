@@ -12,8 +12,7 @@ class Node{
     public:
         // Constructor de la clase Node
         // Al llamarse se debera de pasar los cuatros parametros
-        Node(short identifier, float x_value, float y_value, float z_value)
-        {
+        Node(short identifier, float x_value, float y_value, float z_value){
             ID = identifier;
             xCoordinate = x_value;
             yCoordinate = y_value;
