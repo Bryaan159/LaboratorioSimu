@@ -68,6 +68,7 @@ void create_local_systems(Matrix* Ks, Vector* bs, short num_elements, Mesh* M){
         create_local_b(&bs[e],e,M);
     }
 }
+//Listo
 
 void assembly_K(Matrix* K, Matrix* local_K, short index1, short index2, int index3){
     K->add(local_K->get(0,0),index1,index1);    K->add(local_K->get(0,1),index1,index2);    K->add(local_K->get(0,2),index1,index3);

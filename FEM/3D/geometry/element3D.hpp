@@ -35,6 +35,7 @@ class Element3D{
         void set_node2(Node* node){
             node2 = node;
         }
+        //Element3D
         Node* get_node2(){
             return node2;
         }

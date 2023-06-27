@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
     cout << "**********Creating local systems**********\n\n";
     // Aqui se agrega las funciones de mef_utilities
-    createLocalSystems(local_Ks, local_bs, numElements, &M);
+    create_local_systems(local_Ks, local_bs, numElements, &M);
 
     cout << "**********Performing Assembly**********\n\n";
     assembly(&K, &bm local_Ks, local_bs, numElements, &M);

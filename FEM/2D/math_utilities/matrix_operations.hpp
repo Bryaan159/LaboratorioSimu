@@ -3,6 +3,15 @@
 #include "vector.hpp"
 #include "matrix.hpp"
 
+/*
+    M = | 1 2 3 |
+        | 4 5 6 |
+    
+    scalar la cantidad que se va a multiplicar
+    R donde se va a almacenar el resultado
+    n y m el numero de filas y columnas
+
+*/
 void product_scalar_by_matrix(float scalar, Matrix* M, int n, int m, Matrix* R){
     for(int r = 0; r < n; r++)
         for(int c = 0; c < m; c++)
@@ -17,7 +26,7 @@ void product_matrix_by_vector(Matrix* M, Vector* V, int n, int m, Vector* R){
         R->set(acc,r);
     }
 }
-
+//nueva
 void product_matrix_by_matrix(Matrix* A, Matrix* B, Matrix* R){
     int n = A->get_nrows(), m = A->get_ncols(), p = B->get_nrows(), q = B->get_ncols();
     if(m == p){

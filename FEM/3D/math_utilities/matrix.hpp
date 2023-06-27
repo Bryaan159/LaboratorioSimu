@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//Matrix in 3D
 class Matrix{
     private:
         int nrows, ncols;
@@ -69,6 +69,29 @@ class Matrix{
             data = neoData;
             nrows--;
         }
+
+        void removeColumn(int col){
+            int neoIndex = 0;
+            float** neoData = (float**) malloc(sizeof(float*) * nrows);
+            for(int r = 0; r < nrows; r++)
+                neoData[r] = (float*) malloc(sizeof(float) * (ncols-1));
+
+            for(int r = 0; r < nrows; r++){
+                for(int c = 0; c < ncols; c++)
+                    if(c != col){
+                        neoData[r][neoIndex] = data[r][c];
+                        neoIndex++;
+                    }
+                neoIndex = 0;
+            }
+            //printf("remove_column: %p - %p\n",data[0],data);
+            for(int r = 0; r < nrows; r++)
+                free(data[r]);
+            free(data);
+            data = neoData;
+            ncols--;
+        }
+
 
         void clone(Matrix* other){
             for(int rows = 0 ; rows < nrows; rows++)
