@@ -37,22 +37,22 @@ int main(int argc, char **argv)
     // b.show();
 
     cout << "**********Applying Neumann Boundary Conditions**********\n\n";
-    applyNeumannBoundaryConditions(&b, &M);
+    apply_neumann_boundary_conditions(&b, &M);
 
     // b.show();
 
     cout << "**********Applying Dirichlet Boundary Conditions**********\n\n";
-    applyDirichletBoundaryConditions(&K, &b, &M);
+    apply_dirichlet_boundary_conditions(&K, &b, &M);
     // K.show();
     // b.show();
 
     cout << "**********Solving global system**********\n\n";
     Vector T(b.getSize()), T_full(numNodes);
-    solveSystem(&K, &b, &T);
+    solve_system(&K, &b, &T);
     // T.show();
 
     cout << "**********Preparing results**********\n\n";
-    mergeResultsWithDirichlet(&T, &T_full, numNodes, &M);
+    merge_results_with_dirichlet(&T, &T_full, numNodes, &M);
     // T_full.show();
 
     cout << "**********Writing output file**********\n\n";

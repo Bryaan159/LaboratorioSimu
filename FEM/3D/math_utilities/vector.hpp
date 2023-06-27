@@ -38,6 +38,7 @@ class Vector{
         void add(float value , int position){
             data[position] += value;
         }
+        //Obtener
         
         float get(float value, int position){
             return data[position];

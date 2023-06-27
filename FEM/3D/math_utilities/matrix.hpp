@@ -50,6 +50,7 @@ class Matrix{
         void add(float value, int row, int col){
             data[row][col] += value;
         }
+        //Obteniendo los datos y colocandolos en la matriz
 
         float get(int row, int col){
             return data[row][col];

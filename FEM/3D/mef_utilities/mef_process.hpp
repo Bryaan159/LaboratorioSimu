@@ -93,6 +93,7 @@ void assembly_b(Matrix* b, Vector* local_b, short index1, short index2, short in
     b->add(local_b->get(2), index3);
     b->add(local_b->get(3), index4);
 }
+//Ensamblaje de las matrices y vectores locales a las matrices y vectores globales en 3D
 
 void assembly(Matrix* K, Vector* b, Matrix* Ks, Vector* bs, short num_elements, Mesh* M){
     K->init();
@@ -115,8 +116,78 @@ void assembly(Matrix* K, Vector* b, Matrix* Ks, Vector* bs, short num_elements, 
     }
 
 }
-
+//3D
 void apply_neumann_boundary_conditions(Vector* b, Mesh3D* M){
-    short num_conditions = 
+    short num_conditions = M->getQuantity(NUM_NEUMANN);
 
+    for(int c = 0; c<num_conditions;c++){
+        Condition3D* condition = M->getNeumannCondition(c);
+
+        short index = condition->getNode()->get_ID()-1;
+        b->add(condition->get_value(),index);
+
+    }
 }
+
+void add_column_to_RHS(Matrix* K, Vector* b,int col, float T_bar){
+    for(int r = 0; r<K->getNrows();r++)
+        b->add(-T_bar*K->get(r,col),r);
+}
+//3D
+void apply_dirichlet_boundary_conditions(Matrix* K, Vector* b, Mesh3D* M){
+    int num_conditions = M->getQuantity(NUM_DIRICHLET);
+    int previous_removed = 0;
+
+    for(int c = 0; c < num_conditions; c++){
+        Condition3D* cond = M->getDirichletCondition(c);
+        
+        int index = cond->getNode()->get_ID() - 1 - previous_removed;
+        float cond_value = cond->get_value();
+
+        //K->show();
+        K->removeRow(index);
+        //K->show();
+        //b->show();
+        b->removeRow(index);
+        //b->show();
+
+        add_column_to_RHS(K, b, index, cond_value);
+        //b->show();
+
+        K->removeColumn(index);
+        //K->show();
+
+        previous_removed++;
+    }
+}
+
+void solve_system(Matrix* K, Vector* b, Vector* T){
+    int n = K->getNrows();
+    Matrix Kinversa(n,n);
+    cout << "*****\tCalculating inverse of global matrix******\n\n";
+    calculate_inverse(K, n, &Kinversa);
+
+    cout<<"*****\tPerforming final calculation******\n\n";
+    product_matrix_by_vector(&Kinversa, b, n, n, T);
+}
+//3D
+void merge_results_with_dirichlet(Vector* T, Vector* Tf, int n, Mesh3D* M){
+    int num_dirichlet = M->getQuantity(NUM_DIRICHLET);
+
+    int cont_dirichlet = 0;
+    int cont_T = 0;
+    for(int i = 0; i < n; i++){
+        if(M->doesNodeHaveDirichletCondition(i+1)){
+            Condition* cond = M->getDirichletCondition(cont_dirichlet);
+            cont_dirichlet++;
+        
+            float cond_value = cond->get_value();
+
+            Tf->set(cond_value,i);
+        }else{
+            Tf->set(T->get(cont_T),i);
+            cont_T++;
+        }
+    }
+}
+
