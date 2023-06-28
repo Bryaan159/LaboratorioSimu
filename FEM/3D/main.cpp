@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        cout << "Code doesn´t work it must be:\n";
+        cout << "Code doesn't work it must be:\n";
         cout << "-MEF filename\n";
         exit(EXIT_FAILURE);
     }
@@ -21,9 +21,9 @@ int main(int argc, char **argv)
     string filename(argv[1]);
     read_input(filename, &M);
 
-    short numNodes = M.getQuantity(NUM_NODES);
-    short numElements = M.getQuantity(NUM_ELEMENTS);
-    Matrix K(numNodes, numElements), local_Ks[numElements];
+    int numNodes = M.getQuantity(NUM_NODES);
+    int numElements = M.getQuantity(NUM_ELEMENTS);
+    Matrix K(numNodes, numNodes), local_Ks[numElements];
     Vector b(numNodes), local_bs[numElements];
 
     cout << "**********Creating local systems**********\n\n";
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     create_local_systems(local_Ks, local_bs, numElements, &M);
 
     cout << "**********Performing Assembly**********\n\n";
-    assembly(&K, &bm local_Ks, local_bs, numElements, &M);
+    assembly(&K, &b, local_Ks, local_bs, numElements, &M);
 
     // K.show();
     // b.show();

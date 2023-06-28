@@ -40,7 +40,7 @@ class Vector{
         }
         //Obtener
         
-        float get(float value, int position){
+        float get(int position){
             return data[position];
         }
 
@@ -64,4 +64,4 @@ class Vector{
             cout << " ]\n\n";
         }
 
-}   
+};   

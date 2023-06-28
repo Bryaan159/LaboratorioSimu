@@ -13,7 +13,7 @@ class Matrix{
 
     public:
         Matrix(){}
-        Matriz(int rows, int cols){
+        Matrix(int rows, int cols){
             nrows = rows;
             ncols = cols;
             create();

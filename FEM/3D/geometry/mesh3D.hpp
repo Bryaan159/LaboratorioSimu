@@ -51,7 +51,7 @@ public:
         quantities[NUM_NEUMANN] = numNeumann;
     }
 
-    short getQuantity(quantity3D position)
+    int getQuantity(quantity3D position)
     {
         return quantities[position];
     }
@@ -120,10 +120,10 @@ public:
 
     void report()
     {
-        cout << "Information about FEM in 3D\n**********************\n"
+        cout << "Information about FEM in 3D\n**********************\n";
         cout << "Problem Data\n**********************\n";
-        cout << "Thermal Conductivity: " << problem_data[THERMAL_CONDUCTIVITY] << "\n";
-        cout << "Heat Source: " << problem_data[HEAT_SOURCE] << "\n\n";
+        cout << "Thermal Conductivity: " << problemData[THERMAL_CONDUCTIVITY] << "\n";
+        cout << "Heat Source: " << problemData[HEAT_SOURCE] << "\n\n";
         cout << "Quantities\n***********************\n";
         cout << "Number of nodes: " << quantities[NUM_NODES] << "\n";
         cout << "Number of elements: " << quantities[NUM_ELEMENTS] << "\n";
@@ -143,10 +143,11 @@ public:
         } 
 
         cout<< "\nList of Dirichlet Boundary Conditions\n**********************\n";
-        for(int i = 0; quantities[NUM_DIRICHLET];i++)
+        for(int i = 0; quantities[NUM_DIRICHLET];i++){
             cout << "Condition " << i+1 << ": " << dirichletConditions[i]->getNode()->get_ID() << ", Value = " <<dirichletConditions[i]->get_value() <<"\n";
         cout << "\nList of Neumann Boundary Conditions\n**********************\n";
            cout << "Condition " << i+1 << ": " << neumannConditions[i]->getNode()->get_ID() << ", Value = " <<neumannConditions[i]->get_value() <<"\n";
+        }
         cout << "\n";
     }
 };

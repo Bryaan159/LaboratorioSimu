@@ -12,17 +12,18 @@ void product_scalar_by_matrix(float scalar, Matrix *M, int n, int m, Matrix *R)
 
 void product_matrix_by_vector(Matrix *M, Vector *V, int n, int m, Vector *R)
 {
-    for (int r = 0; r < n; r++)
+    for (int r = 0; r < n; r++){
         float acc_n = 0;
-    for (int c = 0; c < n; c++)
-        acc_n += M->get(r, c) * V->get(c);
-    R->set(acc_n, r);
+        for (int c = 0; c < n; c++)
+            acc_n += M->get(r, c) * V->get(c);
+        R->set(acc_n, r);
+    }
 }
 
 // Funcion que se usara en MEF_Process
 void product_matrix_by_matrix(Matrix *A, Matrix *B, Matrix *R)
 {
-    int n = A->getNrows(), m = A->getNcols, p = B->getNrows(), q = B->getNcols();
+    int n = A->getNrows(), m = A->getNcols(), p = B->getNrows(), q = B->getNcols();
     if (m == p)
     {
         R->setSize(n, q);
@@ -94,7 +95,7 @@ void conjugate_matrix(Matrix *M, int n, Matrix *C)
 {
     for (int r = 0; r < n; r++)
         for (int c = 0; c < n; c++)
-            C->set(pow(-1, r + c) * get_minor(M, n, r, c), r, c);
+            C->set(pow(-1, r + c) * getMinor(M, n, r, c), r, c);
 }
 
 // Funcion transpose
