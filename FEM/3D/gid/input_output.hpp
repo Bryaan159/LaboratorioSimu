@@ -25,7 +25,7 @@ void read_input(string filename, Mesh3D* M){
 
     dat_file >> line >> line;
 
-    for(int i = 0; i < num_dirichlet; i++){
+    for(int i = 0; i < num_elements; i++){
         short id, node1_id, node2_id, node3_id, node4_id;
         dat_file >> id >> node1_id >> node2_id >> node3_id >> node4_id;
         M-> insertElement(new Element3D(id,M->getNode(node1_id-1),M->getNode(node2_id-1),M->getNode(node3_id-1),M->getNode(node4_id-1)),i);
